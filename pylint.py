@@ -11,7 +11,7 @@ def interface():
     
     layout = [
         [sg.Text("PyLint", justification='center', size=(200, 1), font=titulo)],
-        [sg.Input(default_text='Insira o arquivo: ', size=(55, None,)), sg.FileBrowse('Selecionar', key='-IN-')],
+        [sg.Input(default_text='Insira o arquivo: ', size=(55, None,), key='arquivo'), sg.FileBrowse('Selecionar', key='-IN-')],
         [sg.Button("Executar", key="carregar", pad=(200,None))],
         [sg.Multiline(size=(200, 200), key='info', disabled=True)],
     ]
@@ -26,8 +26,14 @@ while True:
     if event == sg.WINDOW_CLOSED:
         break
     
-    if event == 'carregar' and path.isfile(values['-IN-']):
-        sg.Popup("hello")
+
+    if event == 'carregar' and path.isfile(values['arquivo']):
+        sg.Popup("É um arquivo")
+
+    if event == 'carregar' and (not path.isfile(values['arquivo'])):
+        sg.Popup('Não é um arquivo')
+
+
 
     """"
         if event == "enviar":
